@@ -13,7 +13,7 @@ servers:
 paths:
   /offer:
     get:
-      summary: Get individual offer details
+      summary: Get offer
       tags:
         - user
       responses:
@@ -73,7 +73,8 @@ paths:
         '500':
           description: Internal Server Error
       operationId: getPlayerPrices
-      tags: []
+      tags: 
+        - user
   '/player/{player_id}/sell':
     parameters:
       - type: string
@@ -83,8 +84,9 @@ paths:
         schema:
           type: number
     post:
-      summary: Make a sell offer for Player
-      tags: []
+      summary: Place sell order
+      tags: 
+        - user
       responses:
         '200':
           description: OK
@@ -116,8 +118,9 @@ paths:
         in: path
         required: true
     put:
-      summary: cancel offer
-      tags: []
+      summary: Cancel offer
+      tags: 
+        - user
       responses:
         '200':
           description: OK
@@ -126,7 +129,7 @@ paths:
       operationId: cancelOffer
   /offers:
     get:
-      summary: get active offers
+      summary: Get active offers
       tags:
         - user
       responses:
@@ -215,7 +218,8 @@ paths:
         required: true
     post:
       summary: Deposit to account
-      tags: []
+      tags: 
+        - user
       responses:
         '200':
           description: OK
@@ -229,7 +233,8 @@ paths:
         required: true
     post:
       summary: Withdraw from account
-      tags: []
+      tags: 
+        - user
       responses:
         '200':
           description: OK
