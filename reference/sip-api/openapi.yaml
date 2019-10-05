@@ -11,7 +11,7 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /offer:
+  '/offer/{offer_id}':
     get:
       summary: Get offer
       tags:
@@ -38,7 +38,12 @@ paths:
           description: Not Found
       description: Get details about a particular offer
       operationId: getOffer
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: offer_id
+        in: path
+        required: true
   '/player/{player_id}/prices':
     parameters:
       - schema:
@@ -73,8 +78,9 @@ paths:
         '500':
           description: Internal Server Error
       operationId: getPlayerPrices
-      tags: 
+      tags:
         - user
+        - player
   '/player/{player_id}/sell':
     parameters:
       - type: string
@@ -85,8 +91,9 @@ paths:
           type: number
     post:
       summary: Place sell order
-      tags: 
+      tags:
         - user
+        - offer
       responses:
         '200':
           description: OK
@@ -119,7 +126,7 @@ paths:
         required: true
     put:
       summary: Cancel offer
-      tags: 
+      tags:
         - user
       responses:
         '200':
@@ -132,6 +139,7 @@ paths:
       summary: Get active offers
       tags:
         - user
+        - offer
       responses:
         '200':
           description: OK
@@ -174,6 +182,7 @@ paths:
       summary: Get account
       tags:
         - user
+        - account
       responses:
         '200':
           description: OK
@@ -185,6 +194,7 @@ paths:
       summary: Update Account
       tags:
         - user
+        - account
       responses:
         '200':
           description: OK
@@ -194,6 +204,7 @@ paths:
       summary: Remove Account
       tags:
         - user
+        - account
       responses:
         '200':
           description: OK
@@ -218,8 +229,9 @@ paths:
         required: true
     post:
       summary: Deposit to account
-      tags: 
+      tags:
         - user
+        - account
       responses:
         '200':
           description: OK
@@ -233,8 +245,9 @@ paths:
         required: true
     post:
       summary: Withdraw from account
-      tags: 
+      tags:
         - user
+        - account
       responses:
         '200':
           description: OK
@@ -250,11 +263,13 @@ paths:
       description: Get accounts
       tags:
         - user
+        - account
   /holdings:
     get:
       summary: Get holdings
       tags:
         - user
+        - offer
       responses:
         '200':
           description: OK
